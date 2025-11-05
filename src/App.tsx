@@ -26,9 +26,10 @@ export default function App(){
   const [type,setType]=useState<TxType>('expense')
 
   const [budget,setBudget]=useState<number>(()=>Number(localStorage.getItem(BUDGET_KEY(ym(todayISO())))||'0'))
-  import type { CSSProperties } from 'react'; // asegurate que esté arriba del archivo
+  
 
-const [snackCss, setSnackCss] = useState<CSSProperties | undefined>(undefined);
+const [snackCss, setSnackCss] = useState<any>(undefined);
+
 
   const [snackCls,setSnackCls]=useState<string>('background:black;color:white')
 
