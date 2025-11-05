@@ -25,7 +25,10 @@ export default function App(){
   const [type,setType]=useState<TxType>('expense')
 
   const [budget,setBudget]=useState<number>(()=>Number(localStorage.getItem(BUDGET_KEY(ym(todayISO())))||'0'))
-  const [snack,setSnack]=useState<string|null>(null)
+  import type { CSSProperties } from 'react'; // asegurate que esté arriba del archivo
+
+const [snackCss, setSnackCss] = useState<CSSProperties | undefined>(undefined);
+
   const [snackCls,setSnackCls]=useState<string>('background:black;color:white')
 
   const items:Tx[] = useMemo(()=> JSON.parse(localStorage.getItem(TX_KEY)||'[]'), [auth, snack])
@@ -93,7 +96,8 @@ export default function App(){
             <button className="btn primary" onClick={login}>Entrar</button>
           </div>
         )}
-        {snack && <div className="snack" style={{cssText:snackCls}}>{snack}</div>}
+        {snack && <div className="snack" style={snackCss ?? {}}
+>{snack}</div>}
       </div>
     )
   }
@@ -155,7 +159,8 @@ export default function App(){
         }
       </div>
 
-      {snack && <div className="snack" style={{cssText:snackCls}}>{snack}</div>}
+      {snack && <div className="snack" style={snackCss ?? {}}
+>{snack}</div>}
     </div>
   )
 }
